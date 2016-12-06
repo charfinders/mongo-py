@@ -21,7 +21,7 @@ async def spin(msg):
     write(' ' * len(status) + '\x08' * len(status))
 
 
-async def fetch():
+async def download():
     filename = pathlib.Path(unidata.URL).name
     spinner = asyncio.ensure_future(spin('downloading ' + filename))
     async with aiohttp.request('GET', unidata.URL) as resp:
@@ -35,7 +35,7 @@ async def fetch():
 
 def main():
     loop = asyncio.get_event_loop()
-    text = loop.run_until_complete(fetch())
+    text = loop.run_until_complete(download())
 
 if __name__ == '__main__':
     main()
